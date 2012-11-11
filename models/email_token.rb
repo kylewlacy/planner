@@ -1,0 +1,3 @@
+class EmailToken < Token
+
+end

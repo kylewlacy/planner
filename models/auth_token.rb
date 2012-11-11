@@ -1,0 +1,3 @@
+class AuthToken < Token
+
+end

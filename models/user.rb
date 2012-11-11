@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :first_name, :last_name, :email, :password
   validates_uniqueness_of :email
+  has_many :tokens
 
   def self.create_account(first, last, email, password)
     begin
@@ -16,6 +17,7 @@ class User < ActiveRecord::Base
       raise EmailAlreadyUsed if User.exists_with_email?(email)
       raise exception
     end
+    UserTokenRepository.add_email_token(user)
 
     user
   end
