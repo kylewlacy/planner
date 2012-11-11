@@ -18,5 +18,22 @@ describe User do
         )
       end.to raise_error User::EmailAlreadyUsed
     end
+
+    it "creates a cofirmation email token for users" do
+      user = User.create_account(
+        'John', 'Doe', 'john.doe@example.com', 'badpass'
+      )
+      user.tokens.where(:type => 'EmailToken').should_not be_empty
+    end
+
+    it "encrypts users' passwords" do
+      user = User.create_account(
+        'John', 'Doe', 'john.doe@example.com', 'password'
+      )
+
+      user.password.should == 'password'
+      user.password.to_s.should_not == 'password'
+      user.password_hash.should_not == 'password'
+    end
   end
 end
