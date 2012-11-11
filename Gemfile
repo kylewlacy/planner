@@ -19,6 +19,7 @@ group :test do
   gem 'capybara'
   gem 'cucumber'
   gem 'rack-test', :require => "rack/test"
+  gem 'database_cleaner'
 end
 
 
