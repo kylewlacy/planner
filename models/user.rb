@@ -26,10 +26,6 @@ class User < ActiveRecord::Base
     not User.find_by_email(email).nil?
   end
 
-  def self.find_by_email(email)
-    User.where(:email => email).first
-  end
-
   def password
     BCrypt::Password.new(password_hash)
   end
