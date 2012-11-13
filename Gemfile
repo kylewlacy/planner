@@ -10,15 +10,16 @@ gem 'sinatra-flash', :require => 'sinatra/flash'
 # Component requirements
 gem 'sass'
 gem 'haml'
-gem 'activerecord', :require => "active_record"
+gem 'activerecord', :require => 'active_record'
 gem 'sqlite3'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Test requirements
 group :test do
   gem 'rspec'
   gem 'capybara'
   gem 'cucumber'
-  gem 'rack-test', :require => "rack/test"
+  gem 'rack-test', :require => 'rack/test'
   gem 'database_cleaner'
 end
 
