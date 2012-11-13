@@ -23,10 +23,20 @@ class User < ActiveRecord::Base
   end
 
   def self.exists_with_email?(email)
-    not User.find_by_email(email).empty?
+    not User.find_by_email(email).nil?
   end
 
   def self.find_by_email(email)
     User.where(:email => email).first
+  end
+
+  def password
+    BCrypt::Password.new(password_hash)
+  end
+
+  def password=(new_password)
+    self.password_hash = BCrypt::Password.create(
+      new_password, :cost => PASSWORD_COST || 10
+    ).to_s
   end
 end

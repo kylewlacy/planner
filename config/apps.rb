@@ -25,6 +25,14 @@
 # Setup global project settings for your apps. These settings are inherited by every subapp. You can
 # override these settings in the subapps as needed.
 #
+
+case PADRINO_ENV
+when 'test'
+  PASSWORD_COST = 2
+else
+  PASSWORD_COST = 10
+end
+
 Padrino.configure_apps do
   # enable :sessions
   set :session_secret, '484e15540ab48d7f5fc27c9952cf155c649476e2aac37e6682f36c067963a98a'
