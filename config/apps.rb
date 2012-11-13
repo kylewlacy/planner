@@ -28,9 +28,9 @@
 
 case PADRINO_ENV
 when 'test'
-  PASSWORD_COST = 2
+  ENCRYPTION_COST = 4
 else
-  PASSWORD_COST = 10
+  ENCRYPTION_COST = 10
 end
 
 Padrino.configure_apps do

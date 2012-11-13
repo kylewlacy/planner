@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
 
   def password=(new_password)
     self.password_hash = BCrypt::Password.create(
-      new_password, :cost => PASSWORD_COST || 10
+      new_password, :cost => ENCRYPTION_COST
     ).to_s
   end
 end
