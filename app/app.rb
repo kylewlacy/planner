@@ -5,7 +5,8 @@ class Planner < Padrino::Application
   register Padrino::Mailer
   register Padrino::Helpers
 
-  enable :sessions
+  register Padrino::Cookies
+  # enable :sessions
 
   ##
   # Caching support
