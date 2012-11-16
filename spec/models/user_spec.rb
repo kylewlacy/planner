@@ -59,5 +59,11 @@ describe User do
       user.password_hash.should_not == 'badpassword'
       user.password.should be_a BCrypt::Password
     end
+
+    it "raises an error for nonexistent users" do
+      expect do
+        User.find_by_email!('some.user@gmail.com')
+      end.to raise_error User::UserDoesNotExist
+    end
   end
 end

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   class EmailAlreadyUsed < StandardError; end
+  class UserDoesNotExist < StandardError; end
 
   attr_accessible :name, :email, :password
   validates_uniqueness_of :email
@@ -15,6 +16,11 @@ class User < ActiveRecord::Base
     UserTokenRepository.add_email_token(user)
 
     user
+  end
+
+  def self.find_by_email!(email)
+    raise User::UserDoesNotExist unless User.exists_with_email?(email)
+    User.find_by_email(email)
   end
 
   def self.exists_with_email?(email)
