@@ -67,7 +67,7 @@ describe UserAuthenticator do
       UserAuthenticator.authenticate_client!(
         'Chrome',
         :email => 'john@example.com',
-        :client_string => client_string
+        :token => client_string
       ).should == user
     end
 
@@ -84,7 +84,7 @@ describe UserAuthenticator do
         UserAuthenticator.authenticate_client!(
           'Safari',
           :email => 'john@example.com',
-          :client_string => client_string
+          :token => client_string
         )
       end.to raise_error UserAuthenticator::InvalidClient
     end

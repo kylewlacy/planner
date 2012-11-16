@@ -24,10 +24,10 @@ class UserAuthenticator
   end
 
   def self.authenticate_client!(client_agent, client)
-    user = User.find_by_email(client[:email])
+    user = User.find_by_email!(client[:email])
     client_value = unique_client_value(user, client_agent)
 
-    unless BCrypt::Password.new(client[:client_string]) == client_value
+    unless BCrypt::Password.new(client[:token]) == client_value
       raise InvalidClient
     end
 
