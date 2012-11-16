@@ -30,4 +30,6 @@ end
 # gem 'padrino', '0.10.7'
 
 # Or Padrino Edge
-gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
+# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
+
+gem 'padrino', :git => 'git://github.com/kylewlacy/padrino-framework.git'
