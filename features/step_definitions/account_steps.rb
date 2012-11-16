@@ -4,7 +4,9 @@ end
 
 When /^I enter my information$/ do
   User.create_account(
-    'John', 'Doe', 'john.doe@example.com', 'badpassword'
+    :name => 'John Doe',
+    :email => 'john.doe@example.com',
+    :password => 'badpassword'
   )
 end
 
