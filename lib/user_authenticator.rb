@@ -13,19 +13,21 @@ class UserAuthenticator
     token.destroy
   end
 
-  def self.login!(email, password)
-    user = User.find_by_email(email)
+  def self.login!(credentials)
+    user = User.find_by_email(credentials[:email])
 
-    raise WrongPassword unless user.password == password
+    unless user.password == credentials[:password]
+      raise WrongPassword
+    end
 
     UserTokenRepository.add_auth_token(user)
   end
 
-  def self.authenticate_client!(email, client_agent, client_string)
-    user = User.find_by_email(email)
+  def self.authenticate_client!(client_agent, client)
+    user = User.find_by_email(client[:email])
     client_value = unique_client_value(user, client_agent)
 
-    unless BCrypt::Password.new(client_string) == client_value
+    unless BCrypt::Password.new(client[:client_string]) == client_value
       raise InvalidClient
     end
 

@@ -33,7 +33,10 @@ describe UserAuthenticator do
       User.stub(:find_by_email) { user }
       UserTokenRepository.should_receive(:add_auth_token)
 
-      UserAuthenticator.login!('john.doe@example.com', 'asdf')
+      UserAuthenticator.login!(
+        :email => 'john.doe@example.com',
+        :password => 'asdf'
+      )
     end
 
     it "raises an error without a proper password" do
@@ -43,7 +46,10 @@ describe UserAuthenticator do
       UserTokenRepository.should_not_receive(:add_auth_token)
 
       expect do
-        UserAuthenticator.login!('john.doe@example.com', 'jkl')
+        UserAuthenticator.login!(
+          :email => 'john.doe@example.com',
+          :password => 'jkl'
+        )
       end.to raise_error UserAuthenticator::WrongPassword
     end
   end
@@ -59,7 +65,9 @@ describe UserAuthenticator do
       client_string = UserAuthenticator.generate_client_string(user, 'Chrome')
 
       UserAuthenticator.authenticate_client!(
-        'john@example.com', 'Chrome', client_string
+        'Chrome',
+        :email => 'john@example.com',
+        :client_string => client_string
       )
     end
 
@@ -74,7 +82,9 @@ describe UserAuthenticator do
 
       expect do
         UserAuthenticator.authenticate_client!(
-          'john@example.com', 'Safari', client_string
+          'Safari',
+          :email => 'john@example.com',
+          :client_string => client_string
         )
       end.to raise_error UserAuthenticator::InvalidClient
     end
