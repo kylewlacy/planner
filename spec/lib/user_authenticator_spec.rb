@@ -68,7 +68,7 @@ describe UserAuthenticator do
         'Chrome',
         :email => 'john@example.com',
         :client_string => client_string
-      )
+      ).should == user
     end
 
     it "raises an error for an inauthentic client" do

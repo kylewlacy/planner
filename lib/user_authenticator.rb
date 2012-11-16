@@ -31,7 +31,7 @@ class UserAuthenticator
       raise InvalidClient
     end
 
-    true
+    user
   end
 
   def self.generate_client_string(user, client_agent)
