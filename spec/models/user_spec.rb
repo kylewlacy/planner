@@ -66,4 +66,62 @@ describe User do
       end.to raise_error User::UserDoesNotExist
     end
   end
+
+  context "when the user has an account" do
+    before :each do
+      UserTokenRepository.stub(:add_email_token)
+
+      @user = User.create_account(
+        :name => 'John Doe',
+        :email => 'john.doe@example.com',
+        :password => 'somepassword'
+      )
+    end
+
+    context "#tokens" do
+      it "returns the tokens belonging to a user" do
+        3.times do
+          @user.tokens << Token.create!
+        end
+
+        @user.tokens.count.should == 3
+        @user.tokens.each do |token|
+          token.should be_a Token
+        end
+
+        @user.tokens.destroy_all
+        @user.tokens.count.should == 0
+      end
+    end
+
+    context "#sessions" do
+      it "returns the sessions belonging to a user" do
+        3.times do
+          @user.sessions << Session.create!
+        end
+
+        @user.sessions.count.should == 3
+        @user.tokens.count.should == 3
+        @user.email_tokens.count.should == 0
+
+        @user.sessions.destroy_all
+        @user.sessions.count.should ==0
+      end
+    end
+
+    context "#email_tokens" do
+      it "returns the email tokens belonging to a user" do
+        3.times do
+          @user.email_tokens << EmailToken.create!
+        end
+
+        @user.email_tokens.count.should == 3
+        @user.tokens.count.should == 3
+        @user.sessions.count.should == 0
+
+        @user.email_tokens.destroy_all
+        @user.email_tokens.count.should == 0
+      end
+    end
+  end
 end
