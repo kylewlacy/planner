@@ -17,5 +17,7 @@ When /^I confirm my e-mail address$/ do
 end
 
 Then /^I should be able to login$/ do
-  UserAuthenticator.login!('john.doe@example.com', 'badpassword')
+  UserAuthenticator.login!(
+    :email => 'john.doe@example.com',
+    :password => 'badpassword')
 end
