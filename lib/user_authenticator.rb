@@ -14,7 +14,7 @@ class UserAuthenticator
   end
 
   def self.login!(credentials)
-    user = User.find_by_email(credentials[:email])
+    user = User.find_by_email!(credentials[:email])
 
     unless user.password == credentials[:password]
       raise WrongPassword
