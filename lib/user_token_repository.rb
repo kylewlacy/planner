@@ -13,13 +13,13 @@ class UserTokenRepository
     token
   end
 
-  def self.add_auth_token(user)
-    token = AuthToken.create!(
+  def self.add_session(user)
+    session = Session.create!(
       :value        => generate_token_value(64),
       :client_value => generate_token_value(64)
     )
-    user.tokens << token
+    user.tokens << session
 
-    token
+    session
   end
 end

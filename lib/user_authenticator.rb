@@ -20,7 +20,7 @@ class UserAuthenticator
       raise WrongPassword
     end
 
-    UserTokenRepository.add_auth_token(user)
+    UserTokenRepository.add_session(user)
   end
 
   def self.authenticate_client!(client_agent, client)

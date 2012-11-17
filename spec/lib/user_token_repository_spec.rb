@@ -1,14 +1,6 @@
 require './lib/user_token_repository.rb'
 
 describe UserTokenRepository do
-  before do
-    @token_classes_are_temp = !(defined?(EmailToken) && defined?(AuthToken))
-    if @token_classes_are_temp
-      EmailToken ||= Class.new
-      AuthToken ||= Class.new
-    end
-  end
-
   context "#generate_token_value" do
     it "generates random token values" do
       value = UserTokenRepository.generate_token_value
@@ -26,19 +18,12 @@ describe UserTokenRepository do
 
   it "generates tokens for users" do
     EmailToken.stub(:create!) { stub }
-    AuthToken.stub(:create!) { stub }
+    Session.stub(:create!) { stub }
     tokens = stub
     user = stub(:tokens => tokens)
 
     tokens.should_receive(:<<).exactly(2).times
     email_token = UserTokenRepository.add_email_token(user)
-    auth_token = UserTokenRepository.add_auth_token(user)
-  end
-
-  after do
-    if @token_classes_are_temp
-      Object.send(:remove_const, :EmailToken)
-      Object.send(:remove_const, :AuthToken)
-    end
+    session = UserTokenRepository.add_session(user)
   end
 end

@@ -31,7 +31,7 @@ describe UserAuthenticator do
       tokens = stub
       user = stub(:password => 'asdf', :tokens => tokens)
       User.stub(:find_by_email) { user }
-      UserTokenRepository.should_receive(:add_auth_token)
+      UserTokenRepository.should_receive(:add_session)
 
       UserAuthenticator.login!(
         :email => 'john.doe@example.com',
@@ -43,7 +43,7 @@ describe UserAuthenticator do
       tokens = stub
       user = stub(:password => 'asdf', :tokens => tokens)
       User.stub(:find_by_email) { user }
-      UserTokenRepository.should_not_receive(:add_auth_token)
+      UserTokenRepository.should_not_receive(:add_session)
 
       expect do
         UserAuthenticator.login!(
