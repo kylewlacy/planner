@@ -7,6 +7,7 @@ class Planner < Padrino::Application
 
   register Padrino::Cookies
   register Padrino::Flash
+  register Padrino::Relative
   # enable :sessions
 
   ##

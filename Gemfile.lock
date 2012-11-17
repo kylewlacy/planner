@@ -89,7 +89,7 @@ GEM
     padrino-flash (0.2.0)
       padrino-core
       padrino-helpers
-    padrino-relative (0.0.1)
+    padrino-relative (0.0.2)
       padrino (~> 0.10.7)
     polyglot (0.3.3)
     rack (1.4.1)
