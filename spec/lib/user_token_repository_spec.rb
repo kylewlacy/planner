@@ -33,4 +33,18 @@ describe UserTokenRepository do
     UserTokenRepository.add_email_token(user)
     UserTokenRepository.add_session(user)
   end
+
+  context "#destroy_session!" do
+    it "destroys sessions for users" do
+      sessions = stub(:empty? => false)
+      sessions.should_receive(:destroy_all!)
+      sessions.should_receive(:where).with(
+        :client_value => 'A1b2C3'
+      ) { sessions }
+
+      user = stub(:sessions => sessions)
+
+      UserTokenRepository.destroy_session!(user, 'A1b2C3')
+    end
+  end
 end

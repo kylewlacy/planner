@@ -1,4 +1,6 @@
 class UserTokenRepository
+  class NoSuchSession < StandardError; end
+
   def self.generate_token_value(length = 8)
     value_length_error = 'value length must be greater than 2'
     raise ArgumentError, value_length_error unless length > 2
@@ -21,5 +23,17 @@ class UserTokenRepository
     user.sessions << session
 
     session
+  end
+
+  def self.destroy_session!(user, client_value)
+    sessions = user.sessions.where(
+      :client_value => 'A1b2C3'
+    )
+
+    raise NoSuchSession if sessions.empty?
+
+    sessions.destroy_all!
+
+    true
   end
 end
