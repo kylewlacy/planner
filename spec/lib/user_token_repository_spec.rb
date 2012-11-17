@@ -19,11 +19,18 @@ describe UserTokenRepository do
   it "generates tokens for users" do
     EmailToken.stub(:create!) { stub }
     Session.stub(:create!) { stub }
-    tokens = stub
-    user = stub(:tokens => tokens)
 
-    tokens.should_receive(:<<).exactly(2).times
-    email_token = UserTokenRepository.add_email_token(user)
-    session = UserTokenRepository.add_session(user)
+    email_tokens = stub
+    sessions = stub
+    user = stub(
+      :email_tokens => email_tokens,
+      :sessions => sessions
+    )
+
+    email_tokens.should_receive(:<<).once
+    sessions.should_receive(:<<).once
+
+    UserTokenRepository.add_email_token(user)
+    UserTokenRepository.add_session(user)
   end
 end

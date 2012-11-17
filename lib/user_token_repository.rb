@@ -8,7 +8,7 @@ class UserTokenRepository
 
   def self.add_email_token(user)
     token = EmailToken.create!(:value => generate_token_value(16))
-    user.tokens << token
+    user.email_tokens << token
 
     token
   end
@@ -18,7 +18,7 @@ class UserTokenRepository
       :value        => generate_token_value(64),
       :client_value => generate_token_value(64)
     )
-    user.tokens << session
+    user.sessions << session
 
     session
   end
