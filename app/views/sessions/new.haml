@@ -1,0 +1,5 @@
+%h1 Login
+%form{:method => 'post', :action => url_for(:sessions, :create)}
+  %input{:name => 'user[email]', :type => 'email', :placeholder => 'john.doe@example.com'}
+  %input{:name => 'user[password]', :type => 'password', :placeholder => 'password'}
+  %button{:type => 'submit'} Login
