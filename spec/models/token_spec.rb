@@ -7,5 +7,6 @@ describe Token do
     user.tokens << token
 
     user.tokens.should == [token]
+    token.user.should == user
   end
 end
