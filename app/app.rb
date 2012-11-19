@@ -8,8 +8,8 @@ class Planner < Padrino::Application
   register Padrino::Cookies
   register Padrino::Flash
   register Padrino::Relative
-  enable :flash
-  # disable :show_exceptions
+  disable :show_exceptions
+  disable :raise_errors
   # enable :sessions
 
   # set :delivery_method, :sendmail
