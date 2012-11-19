@@ -12,6 +12,7 @@ gem 'padrino-relative'
 # Component requirements
 gem 'sass'
 gem 'haml'
+gem 'bluecloth'
 gem 'activerecord', :require => 'active_record'
 gem 'sqlite3'
 gem 'bcrypt-ruby', :require => 'bcrypt'
