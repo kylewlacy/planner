@@ -1,0 +1,6 @@
+%h1= "Welcome, #{user.first_name}!"
+%h2 Welcome to Planner! To get started, follow the instructions below.
+%p
+  :markdown
+    It looks like you wanted to create an account. If you received this message errornously, please disregard it. Otherwise, **click the link below to confirm your account!**
+  %a{:href => url}= url
