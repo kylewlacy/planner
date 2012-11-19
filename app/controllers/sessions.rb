@@ -34,7 +34,7 @@ Planner.controller :sessions do
 
   error User::UserDoesNotExist do
     flash.now[:error] = "That user doesn't exist!"
-    halt 403
+    halt 401
   end
 
   error UserTokenRepository::NoSuchSession do
