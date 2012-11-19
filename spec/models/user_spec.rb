@@ -132,15 +132,18 @@ describe User do
       end
     end
 
-    context "#courses" do
-      it "returns the courses associated with a user" do
-        course = Course.create!(
-          :name => 'Math'
+    context "#add_course!" do
+      it "adds courses for a user" do
+        @user.add_course!(
+          :name => 'Math',
+          :data => {
+            :room => '101'
+          }
         )
 
-        @user.courses << course
-        @user.courses.should == [course]
-        course.user.should == @user
+        @user.courses.count.should == 1
+        @user.courses.first.name.should == 'Math'
+        @user.courses.first.data[:room].should == '101'
       end
     end
   end

@@ -50,4 +50,10 @@ class User < ActiveRecord::Base
       new_password, :cost => ENCRYPTION_COST
     ).to_s
   end
+
+
+
+  def add_course!(attributes)
+    self.courses.create!(attributes)
+  end
 end
