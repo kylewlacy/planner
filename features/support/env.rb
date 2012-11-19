@@ -8,3 +8,13 @@ require 'rspec/expectations'
 # You can handle all padrino applications using instead:
 #   Padrino.application
 Capybara.app = Planner.tap { |app|  }
+
+DatabaseCleaner.strategy = :truncation
+
+Before do
+  DatabaseCleaner.start
+end
+
+After do
+  DatabaseCleaner.clean
+end
