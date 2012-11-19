@@ -10,6 +10,20 @@ class Planner < Padrino::Application
   register Padrino::Relative
   # enable :sessions
 
+  # set :delivery_method, :sendmail
+  set :delivery_method, :smtp => {
+    :address => ENV['SMTP_ADDRESS'],
+    :port => ENV['SMTP_PORT'],
+    :domain => ENV['SMTP_DOMAIN'],
+    :user_name => ENV['SMTP_USERNAME'],
+    :password => ENV['SMTP_PASSWORD'],
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
+  set :mailer_defaults, :from => ENV['SMTP_EMAIL_ADDRESS']
+  set :mailer_defaults, :content_type => :html
+
   ##
   # Caching support
   #
