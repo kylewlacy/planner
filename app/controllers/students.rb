@@ -1,4 +1,4 @@
-Planner.controllers :students do
+Planner.controller :students do
   get :new do
     render current_path
   end

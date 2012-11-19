@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "StudentsController" do
+describe 'StudentsController' do
   context "get#new" do
     it "returns a sign up form" do
       get '/students/new'

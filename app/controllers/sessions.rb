@@ -1,4 +1,4 @@
-Planner.controllers :sessions do
+Planner.controller :sessions do
   get :new do
     render current_path
   end

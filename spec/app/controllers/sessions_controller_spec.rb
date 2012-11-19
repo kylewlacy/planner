@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "SessionsController" do
+describe 'SessionsController' do
   context "get#new" do
     it "returns a login form" do
       get '/sessions/new'
