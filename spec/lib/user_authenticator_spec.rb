@@ -4,21 +4,20 @@ describe UserAuthenticator do
   context "#confirm_email!" do
     it "confirms users' e-mails" do
       token = stub
-      tokens = stub(:where => [token])
-      user = stub(:tokens => tokens)
+      tokens = stub
+      user = stub(:email_tokens => tokens)
 
-      tokens.should_receive(:where).with(
-        :value => 'a1B2c3',
-        :type => 'EmailToken'
-      )
+      tokens.should_receive(:where).with(:value => 'a1B2c3') { [token] }
       token.should_receive(:destroy)
 
       UserAuthenticator.confirm_email!(user, 'a1B2c3')
    end
 
     it "raises an error with an invalid email token" do
-      tokens = stub(:where => [])
-      user = stub(:tokens => tokens)
+      tokens = stub
+      user = stub(:email_tokens => tokens)
+
+      tokens.should_receive(:where).with(:value => 'a1B2c3') { [] }
 
       expect do
         UserAuthenticator.confirm_email!(user, 'a1B2c3')

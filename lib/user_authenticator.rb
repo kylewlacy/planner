@@ -4,10 +4,7 @@ class UserAuthenticator
   class InvalidClient < StandardError; end
 
   def self.confirm_email!(user, token_value)
-    token = user.tokens.where(
-      :value => token_value,
-      :type => 'EmailToken'
-    ).last
+    token = user.email_tokens.where(:value => token_value).last
     raise InvalidEmailToken if token.nil?
 
     token.destroy
