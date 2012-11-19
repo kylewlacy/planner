@@ -3,7 +3,7 @@ Given /^I do not have an account$/ do
 end
 
 When /^I enter my information$/ do
-  User.create_account(
+  User.create_account!(
     :name => 'John Doe',
     :email => 'john.doe@example.com',
     :password => 'badpassword'
@@ -19,5 +19,6 @@ end
 Then /^I should be able to login$/ do
   UserAuthenticator.login!(
     :email => 'john.doe@example.com',
-    :password => 'badpassword')
+    :password => 'badpassword'
+  )
 end

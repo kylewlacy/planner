@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   context "when the user doesn't have an account" do
     it "can create new accounts" do
-      User.create_account(
+      User.create_account!(
         :name => 'John Doe',
         :email => 'john.doe@example.com',
         :password => 'somepassword'
@@ -11,14 +11,14 @@ describe User do
     end
 
     it "only lets users create one account" do
-      User.create_account(
+      User.create_account!(
         :name => 'John Doe',
         :email => 'john.doe@example.com',
         :password => 'somepassword'
       )
 
       expect do
-        User.create_account(
+        User.create_account!(
           :name => 'John Doe',
           :email => 'john.doe@example.com',
           :password => 'somepassword'
@@ -27,7 +27,7 @@ describe User do
     end
 
     it "creates a cofirmation email token for users" do
-      user = User.create_account(
+      user = User.create_account!(
         :name => 'John Doe',
         :email => 'john.doe@example.com',
         :password => 'badpass'
@@ -36,7 +36,7 @@ describe User do
     end
 
     it "saves users' names in the database" do
-      user = User.create_account(
+      user = User.create_account!(
         :name => 'John Jimmy Doe',
         :email => 'john.jimmy.doe@example.com',
         :password => 'terriblepassword'
@@ -48,7 +48,7 @@ describe User do
     end
 
     it "encrypts users' passwords" do
-      user = User.create_account(
+      user = User.create_account!(
         :name => 'John Doe',
         :email => 'john.doe@example.com',
         :password => 'badpassword'
@@ -71,7 +71,7 @@ describe User do
     before :each do
       UserTokenRepository.stub(:add_email_token)
 
-      @user = User.create_account(
+      @user = User.create_account!(
         :name => 'John Doe',
         :email => 'john.doe@example.com',
         :password => 'somepassword'

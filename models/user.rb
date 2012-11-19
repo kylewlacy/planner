@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :sessions
   has_many :email_tokens
 
-  def self.create_account(attributes)
+  def self.create_account!(attributes)
     begin
       user = create!(attributes)
     rescue ActiveRecord::RecordInvalid => exception
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    [first_name, last_name].join(' ')
+    [self.first_name, self.last_name].join(' ')
   end
 
   def name=(new_name)
