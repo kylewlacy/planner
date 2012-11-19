@@ -17,9 +17,8 @@ When /^I enter my information$/ do
 end
 
 When /^I confirm my e-mail address$/ do
-  student = Student.find_by_email('john.doe@example.com')
-  token = student.email_tokens.last
-  UserAuthenticator.confirm_email!(student, token.value)
+  token = @student.email_tokens.last
+  UserAuthenticator.confirm_email!(@student, token.value)
 end
 
 Then /^I should be able to login$/ do
