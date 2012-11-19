@@ -6,7 +6,7 @@ class Planner < Padrino::Application
   register Padrino::Helpers
 
   register Padrino::Cookies
-  register Sinatra::Flash
+  register Padrino::Flash
   register Padrino::Relative
   enable :flash
   # disable :show_exceptions
