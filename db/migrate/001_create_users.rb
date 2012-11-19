@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :password_hash
+      t.boolean :confirmed, :default => false
 
       t.string :type
 
