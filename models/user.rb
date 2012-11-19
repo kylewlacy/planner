@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :sessions
   has_many :email_tokens
 
+  has_many :courses
+
   def self.create_account!(attributes)
     begin
       user = create!(attributes)

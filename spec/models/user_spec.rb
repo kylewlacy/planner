@@ -131,5 +131,17 @@ describe User do
         @user.email_tokens.count.should == 0
       end
     end
+
+    context "#courses" do
+      it "returns the courses associated with a user" do
+        course = Course.create!(
+          :name => 'Math'
+        )
+
+        @user.courses << course
+        @user.courses.should == [course]
+        course.user.should == @user
+      end
+    end
   end
 end
