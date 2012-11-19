@@ -1,0 +1,6 @@
+%h1 Student Sign Up
+%form{:method => 'post', :action => url_for(:sessions, :create)}
+  %input{:name => 'student[name]', :type => 'text', :placeholder => 'John Doe'}
+  %input{:name => 'student[email]', :type => 'email', :placeholder => 'john.doe@example.com'}
+  %input{:name => 'student[password]', :type => 'password', :placeholder => 'password'}
+  %input{:name => 'confirm', :type => 'password', :placeholder => 'password'}
