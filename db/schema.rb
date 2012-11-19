@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define(:version => 4) do
+
+  create_table "courses", :force => true do |t|
+    t.string   "name"
+    t.text     "data"
+    t.integer  "user_id"
+    t.integer  "student_courses_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "student_courses", :force => true do |t|
+    t.integer "student_id"
+    t.integer "course_id"
+  end
 
   create_table "tokens", :force => true do |t|
     t.integer  "user_id"
