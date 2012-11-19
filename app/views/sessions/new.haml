@@ -1,5 +1,9 @@
 %h1 Login
 %form{:method => 'post', :action => url_for(:sessions, :create)}
-  %input{:name => 'user[email]', :type => 'email', :placeholder => 'john.doe@example.com'}
-  %input{:name => 'user[password]', :type => 'password', :placeholder => 'password'}
+  %label{:for => 'email'} E-mail
+  %input{:name => 'user[email]', :id => 'email', :type => 'email', :placeholder => 'john.doe@example.com'}
+
+  %label{:for => 'password'} Password
+  %input{:name => 'user[password]', :id => 'password', :type => 'password', :placeholder => 'password'}
+
   %button{:type => 'submit'} Login
