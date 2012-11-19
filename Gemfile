@@ -5,7 +5,7 @@ gem 'thin'
 
 # Project requirements
 gem 'rake'
-gem 'padrino-flash'
+gem 'sinatra-flash'
 gem 'padrino-cookies'
 gem 'padrino-relative'
 
