@@ -9,6 +9,8 @@ describe UserAuthenticator do
 
       tokens.should_receive(:where).with(:value => 'a1B2c3') { [token] }
       token.should_receive(:destroy)
+      user.should_receive(:confirmed=).with(true)
+      user.should_receive(:save)
 
       UserAuthenticator.confirm_email!(user, 'a1B2c3')
    end
@@ -26,9 +28,9 @@ describe UserAuthenticator do
   end
 
   context "#login!" do
-    it "logs in users with a proper password" do
+    it "logs in confirmed users with a proper password" do
       tokens = stub
-      user = stub(:password => 'asdf', :tokens => tokens)
+      user = stub(:password => 'asdf', :tokens => tokens, :confirmed => true)
       User.stub(:find_by_email) { user }
       UserTokenRepository.should_receive(:add_session)
 
@@ -40,7 +42,7 @@ describe UserAuthenticator do
 
     it "raises an error without a proper password" do
       tokens = stub
-      user = stub(:password => 'asdf', :tokens => tokens)
+      user = stub(:password => 'asdf', :tokens => tokens, :confirmed => true)
       User.stub(:find_by_email) { user }
       UserTokenRepository.should_not_receive(:add_session)
 
@@ -50,6 +52,19 @@ describe UserAuthenticator do
           :password => 'jkl'
         )
       end.to raise_error UserAuthenticator::WrongPassword
+    end
+
+    it "raises an error for unconfirmed users" do
+      user = stub(:password => 'asdf', :confirmed => false)
+      User.stub(:find_by_email) { user }
+      UserTokenRepository.should_not_receive(:add_session)
+
+      expect do
+        UserAuthenticator.login!(
+          :email => 'john.doe@example.com',
+          :password => 'asdf'
+        )
+      end.to raise_error UserAuthenticator::UnconfirmedUser
     end
   end
 

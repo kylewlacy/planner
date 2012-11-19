@@ -2,10 +2,14 @@ class UserAuthenticator
   class InvalidEmailToken < StandardError; end
   class WrongPassword < StandardError; end
   class InvalidClient < StandardError; end
+  class UnconfirmedUser < StandardError; end
 
   def self.confirm_email!(user, token_value)
     token = user.email_tokens.where(:value => token_value).last
     raise InvalidEmailToken if token.nil?
+
+    user.confirmed = true
+    user.save
 
     token.destroy
   end
@@ -13,9 +17,8 @@ class UserAuthenticator
   def self.login!(credentials)
     user = User.find_by_email!(credentials[:email])
 
-    unless user.password == credentials[:password]
-      raise WrongPassword
-    end
+    raise UnconfirmedUser unless user.confirmed
+    raise WrongPassword unless user.password == credentials[:password]
 
     UserTokenRepository.add_session(user)
   end
