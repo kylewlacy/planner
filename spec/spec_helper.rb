@@ -7,6 +7,8 @@ RSpec.configure do |conf|
   conf.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+
+    Planner.set :delivery_method, :test
   end
 
   conf.before(:each) do
