@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 4) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
-    t.text     "data"
+    t.text     "json_data"
     t.integer  "user_id"
     t.integer  "student_courses_id"
     t.datetime "created_at",         :null => false

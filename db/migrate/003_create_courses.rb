@@ -2,7 +2,7 @@ class CreateCourses < ActiveRecord::Migration
   def self.up
     create_table :courses do |t|
       t.string :name
-      t.text :data
+      t.text :json_data
 
       t.references :user
       t.references :student_courses
