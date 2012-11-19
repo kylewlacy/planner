@@ -16,6 +16,7 @@ gem 'bluecloth'
 gem 'activerecord', :require => 'active_record'
 gem 'sqlite3'
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'timerizer'
 
 # Test requirements
 group :test do
