@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :password
   validates_uniqueness_of :email
+  validates_presence_of :first_name, :last_name, :email, :password_hash
+
   has_many :tokens
   has_many :sessions
   has_many :email_tokens

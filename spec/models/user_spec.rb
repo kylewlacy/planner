@@ -26,6 +26,12 @@ describe User do
       end.to raise_error User::EmailAlreadyUsed
     end
 
+    it "must have the required fields" do
+      expect do
+        User.create_account!({})
+      end.to raise_error ActiveRecord::RecordInvalid
+    end
+
     it "creates a cofirmation email token for users" do
       user = User.create_account!(
         :name => 'John Doe',
@@ -81,7 +87,7 @@ describe User do
     context "#tokens" do
       it "returns the tokens belonging to a user" do
         3.times do
-          @user.tokens << Token.create!
+          @user.tokens << Token.create!(:value => 'A1b2C3')
         end
 
         @user.tokens.count.should == 3
@@ -97,7 +103,9 @@ describe User do
     context "#sessions" do
       it "returns the sessions belonging to a user" do
         3.times do
-          @user.sessions << Session.create!
+          @user.sessions << Session.create!(
+            :value => 'A1b2C3', :client_value => 'a1B2c3'
+          )
         end
 
         @user.sessions.count.should == 3
@@ -112,7 +120,7 @@ describe User do
     context "#email_tokens" do
       it "returns the email tokens belonging to a user" do
         3.times do
-          @user.email_tokens << EmailToken.create!
+          @user.email_tokens << EmailToken.create!(:value => 'A1b2C3')
         end
 
         @user.email_tokens.count.should == 3
