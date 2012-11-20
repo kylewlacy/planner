@@ -132,9 +132,9 @@ describe User do
       end
     end
 
-    context "#add_course!" do
+    context "#create_course!" do
       it "adds courses for a user" do
-        @user.add_course!(
+        @user.create_course!(
           :name => 'Math',
           :data => {
             :room => '101'

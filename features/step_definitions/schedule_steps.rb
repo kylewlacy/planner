@@ -17,7 +17,7 @@ Given /^I'm logged in$/ do
 end
 
 When /^I enter my course information$/ do
-  @course = @student.add_course!(
+  @course = @student.create_course!(
     :name => 'Math',
     :data => {
       :room => '101'

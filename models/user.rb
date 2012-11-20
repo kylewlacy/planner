@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     ).to_s
   end
 
-  def add_course!(attributes)
+  def create_course!(attributes)
     self.courses.create!(attributes)
   end
 
