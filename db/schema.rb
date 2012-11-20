@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 4) do
+ActiveRecord::Schema.define(:version => 6) do
+
+  create_table "course_schedules", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "schedule_id"
+    t.integer  "start_integer"
+    t.integer  "end_integer"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -20,6 +29,14 @@ ActiveRecord::Schema.define(:version => 4) do
     t.integer  "student_courses_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "schedule_courses_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "student_courses", :force => true do |t|
