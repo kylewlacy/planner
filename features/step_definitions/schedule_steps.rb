@@ -28,7 +28,7 @@ end
 When /^I enter my schedule for the course$/ do
   UserScheduleRepository.add_schedule!(
     @student, :default,
-    :'1' => {
+    1 => {
       :course => @course,
       :start => WallClock.new(9, 00),
       :end => WallClock.new(10, 00)
@@ -37,5 +37,6 @@ When /^I enter my schedule for the course$/ do
 end
 
 Then /^I should have the course in my schedule$/ do
-  @student.default_schedule.courses.should include(@course)
+  @student.find_schedule(:default).courses.should include(@course)
+  @student.courses.should include(@course)
 end
