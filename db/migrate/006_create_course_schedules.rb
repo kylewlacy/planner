@@ -3,6 +3,7 @@ class CreateCourseSchedules < ActiveRecord::Migration
     create_table :course_schedules do |t|
       t.references :course
       t.references :schedule
+      t.integer :period
       t.integer :start_integer
       t.integer :end_integer
 

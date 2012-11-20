@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 6) do
   create_table "course_schedules", :force => true do |t|
     t.integer  "course_id"
     t.integer  "schedule_id"
+    t.integer  "period"
     t.integer  "start_integer"
     t.integer  "end_integer"
     t.datetime "created_at",    :null => false
