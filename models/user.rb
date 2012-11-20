@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :email_tokens
 
   has_many :courses
+  has_many :schedules
 
   def self.create_account!(attributes)
     begin
@@ -51,9 +52,22 @@ class User < ActiveRecord::Base
     ).to_s
   end
 
-
-
   def add_course!(attributes)
     self.courses.create!(attributes)
+  end
+
+  def find_schedule(name)
+    self.schedules.where(:name => name).last
+  end
+
+  def find_schedule!(name)
+    schedule = self.find_schedule(name)
+    if schedule.nil?
+      schedule = self.schedules.create!(
+        :name => name
+      )
+    end
+
+    schedule
   end
 end

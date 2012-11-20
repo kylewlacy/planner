@@ -146,5 +146,34 @@ describe User do
         @user.courses.first.data[:room].should == '101'
       end
     end
+
+    context "#find_schedule" do
+      it "returns an existing schedule" do
+        @user.schedules.should == []
+        @user.find_schedule(:default).should be_nil
+
+        schedule = Schedule.create!(:name => :default)
+        @user.schedules << schedule
+
+        @user.find_schedule(:default).should == schedule
+      end
+    end
+
+    context "#find_schedule!" do
+      it "returns an existing schedule" do
+        schedule = Schedule.create!(:name => :default)
+        @user.schedules << schedule
+
+        @user.find_schedule!(:default).should == schedule
+      end
+
+      it "creates a new schedule if it doesn't exist" do
+        @user.schedules.should == []
+
+        schedule = @user.find_schedule!(:default)
+        schedule.should be_a Schedule
+        @user.schedules.should == [schedule]
+      end
+    end
   end
 end
