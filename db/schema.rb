@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 6) do
   end
 
   create_table "student_courses", :force => true do |t|
+    t.text    "json_data"
     t.integer "student_id"
     t.integer "course_id"
   end
