@@ -38,5 +38,5 @@ end
 
 Then /^I should have the course in my schedule$/ do
   @student.find_schedule(:default).courses.should include(@course)
-  @student.courses.should include(@course)
+  @student.enrolled_courses.should include(@course)
 end
