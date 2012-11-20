@@ -8,7 +8,7 @@ describe UserScheduleRepository do
     schedule = stub(:course_schedules => course_schedules)
 
     user = stub
-    user.should_receive(:find_schedule).with(:default) { schedule }
+    user.should_receive(:find_schedule!).with(:default) { schedule }
     course_schedules.should_receive(:create!).with(
       :period => 1,
       :course => math,
