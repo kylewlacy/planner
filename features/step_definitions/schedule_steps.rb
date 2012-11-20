@@ -26,8 +26,8 @@ When /^I enter my course information$/ do
 end
 
 When /^I enter my schedule for the course$/ do
-  @student.add_schedule!(
-    :default,
+  UserScheduleRepository.add_schedule!(
+    @student, :default,
     :'1' => {
       :course => @course,
       :start => WallClock.new(9, 00),
